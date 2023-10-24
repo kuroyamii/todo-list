@@ -7,6 +7,11 @@ import TrashIcon from "../icons/TrashIcon";
 const TodoCard = (props: TodoCardProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const editRef = useRef<any>();
+  const onClickDelete = () => {
+    let data = props.todos;
+    data.splice(props.index, 1);
+    props.setTodos([...data]);
+  };
   const onClickDone = () => {
     let data = props.todos;
     data[props.index].status = !props.todo.status;
@@ -62,6 +67,7 @@ const TodoCard = (props: TodoCardProps) => {
           <DoneIcon width="24px" height="24px" />
         </button>
         <button
+          onClick={onClickDelete}
           className={`text-white  ${
             props.todo.status == true
               ? "opacity-50 hover:cursor-default"
